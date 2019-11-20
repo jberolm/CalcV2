@@ -20,6 +20,14 @@ var options = {
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
+//-----------Swagger-stats
+var swStats = require('swagger-stats');    
+
+// Enable swagger-stats middleware in express app, passing swagger specification as option 
+app.use(swStats.getMiddleware({swaggerSpec:spec}));
+
+//----------------Swagger-stats
+
 // Initialize the Swagger middleware
 oas3Tools.initializeMiddleware(swaggerDoc, function (middleware) {
 
